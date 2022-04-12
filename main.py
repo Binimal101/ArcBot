@@ -2,7 +2,7 @@
 import discord, os
 from ratelimit import limits, sleep_and_retry #So that the bot doesn't get ratelimited and die
 #File Imports
-from commands import *
+from commands import * #terrible practice, but much needed due to the amount of imports needed
 from helper import commands
 from shop import get_shop_items
 
@@ -81,7 +81,7 @@ async def on_message(message): #message object is given to this function
 	elif commands.command(message, 'inv', 'inventory', or_aliases=True):
 		embed = await database.commands.inventory(client, message.author)
 		await message.channel.send(embed=embed)
-	elif message.content == 
+
 	
 
 client.run(TOKEN)
