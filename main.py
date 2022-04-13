@@ -1,5 +1,5 @@
 #Main Imports
-import discord, os
+import discord, os, asyncio
 from ratelimit import limits, sleep_and_retry #So that the bot doesn't get ratelimited and die
 #File Imports
 from commands import * #terrible practice, but much needed due to the amount of imports needed
@@ -28,11 +28,17 @@ async def on_message(message): #message object is given to this function
 	connection = message.channel #this var has a instance function called send that sends messages and embeds to the channel of the message instance
 	guild = connection.guild
 
-	if message.channel.id != 849611879521320960 and 'arc ' in message.content.lower():
-		allowed = client.get_channel(849611879521320960)
-		await message.channel.send(f'Sorry, I can\'t talk here, try going to Bot_Coms')
+	if message.channel.id != 844572963264135178 and 'arc ' in message.content.lower():
+		allowed = client.get_channel(844572963264135178)
+		await message.delete()
+		
+		warning = await message.channel.send(f'Sorry, I can\'t talk here, try going to "bot_testing"')
+		
+		await asyncio.sleep(3) #sleep for 3 seconds
 
-	if commands.command(message, 'hey', 'hi', 'howdy', 'hello', 'heya', or_aliases=True):
+		await warning.delete() #delete the warning
+
+	elif commands.command(message, 'hey', 'hi', 'howdy', 'hello', 'heya', or_aliases=True):
 		await Fun.greet(message)
 	
 	elif commands.command(message, 'update'):
